@@ -7,4 +7,9 @@ class DiariesController < ApplicationController
     end
       render json: { diaries: Diary.all.to_json }
     end
+
+  def helth
+    head 200
   end
+end
+
