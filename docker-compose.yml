@@ -39,6 +39,18 @@ services:
     depends_on: 
       - rails
 
+  frontend:
+    container_name: front
+    build:
+      context: .
+      dockerfile: ./nuxt/Dockerfile
+    volumes:
+      - ./nuxt:/app
+    image: frontend
+    ports:
+      - 8080:8080
+    command: "npm run dev"
+
 volumes:
   db_data:
   sockets:
