@@ -5,6 +5,11 @@ WORKDIR /app
 ENV LANG C.UTF-8
 ENV TZ Asia/Tokyo
 
+# ADD /nuxt/package.json /app/package.json
+# ADD /nuxt/package-lock.json /app/package-lock.json
+ADD package.json /app/package.json
+ADD package-lock.json /app/package-lock.json
+
 RUN apt-get update -y && \
   apt-get upgrade -y && \
   npm install npm@6.14.4 && \
@@ -16,8 +21,11 @@ RUN apt-get update -y && \
 
 ADD . /app
 
-# RUN npm run build
+RUN npm run build
 
 ENV HOST 0.0.0.0
 
-EXPOSE 8080
+EXPOSE 3000
+# EXPOSE 8080
+
+CMD ["npm", "run", "start"]

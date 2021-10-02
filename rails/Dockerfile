@@ -13,19 +13,19 @@ RUN apt-get update -qq && \
 RUN mkdir /app
 WORKDIR /app
 
-ADD ./rails/Gemfile /app/Gemfile
-# ADD ./rails/Gemfile.lock /app/Gemfile.lock
+ADD Gemfile /app/Gemfile
+ADD Gemfile.lock /app/Gemfile.lock
 RUN bundle install
 
 ADD . /app
 RUN mkdir -p tmp/sockets
-# RUN rm -r tmp/pids
+RUN rm -r tmp/pids
 RUN mkdir tmp/pids
 
 EXPOSE 3000
 
 ENV HOST 0.0.0.0
 
-RUN chmod +x ./rails/entrypoint.sh
+RUN chmod +x ./entrypoint.sh
 
 CMD ["./rails/entrypoint.sh"]

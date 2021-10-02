@@ -48,7 +48,9 @@ export default {
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: {
+    baseURL: process.env.NODE_ENV === "production" ? "http://rails-api-back-733481851.ap-northeast-1.elb.amazonaws.com" : "http://localhost:3000"
+  },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
