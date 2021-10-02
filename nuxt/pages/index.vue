@@ -19,7 +19,7 @@ export default {
   },
   methods: {
     async getSomething() {
-      const response = await this.$axios.$get('http://localhost:3000/diaries')
+      const response = await this.$axios.$get('/diaries')
       this.diaries = JSON.parse(response.diaries)
     }
   },
