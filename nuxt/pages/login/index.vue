@@ -19,7 +19,7 @@
             :append-icon="toggle.icon"
             :type="toggle.type"
             autocomplete=“on”
-            @click:append="show = !show"
+            @click:append="passShow = !passShow"
             label="パスワード"
           />
           <v-card-actions>
@@ -41,13 +41,13 @@
 export default {
   data(){
     return {
-      show: false
+      passShow: false
     }
   },
   computed: {
     toggle () {
-      const icon = this.show ? 'mdi-eye' : 'mdi-eye-off'
-      const type = this.show ? 'text' : 'password'
+      const icon = this.passShow ? 'mdi-eye' : 'mdi-eye-off'
+      const type = this.passShow ? 'text' : 'password'
       return { icon, type }
     }
   }
