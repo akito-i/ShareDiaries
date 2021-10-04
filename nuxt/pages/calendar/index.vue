@@ -62,7 +62,7 @@
         <v-sheet class="flex">
         <v-calendar
           ref="calendar"
-          v-model="value"
+          v-model="dateValue"
           locale="ja-jp"
         ></v-calendar>
       </v-sheet>
@@ -76,13 +76,13 @@ import { format } from 'date-fns';
 export default {
   data() {
     return {
-       dateValue: format(new Date(), 'yyyy/MM/dd'),
+       dateValue: new Date(),
        isFollow: false
     }
   },
   computed: {
     calendarTitle() {
-        return format(new Date(this.dateValue), 'yyyy年 M月');
+        return format(this.dateValue, 'yyyy年 M月');
     },
     toggle(){
       const buttonColor = this.isFollow ? 'light-gray' : 'light-blue'
