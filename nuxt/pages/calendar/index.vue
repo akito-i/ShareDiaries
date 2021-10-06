@@ -17,14 +17,7 @@
                 <v-subheader>imamura akito</v-subheader>
               </v-list-item-content>
               <v-list-item-action>
-                <v-btn 
-                  :color="toggle.buttonColor"
-                  class="white--text"
-                  small
-                  @click="isFollow = !isFollow"
-                >
-                    {{ toggle.followStatus }}
-                </v-btn>
+                <FollowButton/>
               </v-list-item-action>
             </v-list-item>
               <v-list-item>
@@ -72,8 +65,12 @@
 
 <script>
 import { format } from 'date-fns';
+import FollowButton from '@/components/FollowButton'
 
 export default {
+  components: {
+    FollowButton,
+  },
   data() {
     return {
        dateValue: new Date(),
