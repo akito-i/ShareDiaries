@@ -90,7 +90,7 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer />
-            <v-btn @click="closeDialog">閉じる</v-btn>
+            <v-btn @click="closeEventDialog">閉じる</v-btn>
             <v-btn class="primary" >投稿する</v-btn>
             <v-spacer />
           </v-card-actions>
@@ -118,7 +118,7 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer />
-            <v-btn @click="closeDialog">閉じる</v-btn>
+            <v-btn @click="closeProfileDialog">閉じる</v-btn>
             <v-btn class="primary" >更新する</v-btn>
             <v-spacer />
           </v-card-actions>
@@ -164,8 +164,10 @@ export default {
     showProfileDialog() {
         this.isShowProfile = true
       },
-    closeDialog () {
+    closeEventDialog () {
       this.isShowEvent = false
+    },
+    closeProfileDialog () {
       this.isShowProfile = false
     },
   }
