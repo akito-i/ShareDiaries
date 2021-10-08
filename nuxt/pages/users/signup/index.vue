@@ -9,22 +9,22 @@
       <v-card-text>
         <v-form ref="form" lazy-validation>
           <v-text-field
-            v-model="email"
+            v-model="user.name"
             prepend-icon="mdi-emoticon-happy"
             label="name"
           />
           <v-text-field
-            v-model="email"
+            v-model="user.email"
             prepend-icon="mdi-email"
             label="email"
           />
           <v-text-field
-            v-model="email"
+            v-model="user.hobby"
             prepend-icon="mdi-message-text"
             label="hobby"
           />
           <v-text-field
-            v-model="password"
+            v-model="user.password"
             prepend-icon="mdi-lock"
             :append-icon="toggle.icon"
             :type="toggle.type"
@@ -33,7 +33,7 @@
             label="password"
           />
           <v-text-field
-            v-model="password"
+            v-model="user.password_confirmation"
             prepend-icon="mdi-lock"
             :append-icon="toggle.icon"
             :type="toggle.type"
@@ -45,7 +45,7 @@
             <v-btn
               color="light-green"
               class="white--text"
-              @click="login"
+              @click="registerUser"
             >
               登録する
             </v-btn>
@@ -60,7 +60,14 @@
 export default {
   data(){
     return {
-      passShow: false
+      passShow: false,
+      user: {
+        name: '',
+        email: '',
+        hobby: '',
+        password: '',
+        password_confirmation: '',
+      },
     }
   },
   computed: {
@@ -69,6 +76,13 @@ export default {
       const type = this.passShow ? 'text' : 'password'
       return { icon, type }
     }
-  }
+  },
+  methods: {
+    registerUser() {
+      this.$axios.post('/api/v1/auth', this.user).then((response) => {
+        window.location.href = '/calendar'
+      })
+    },
+  },
 }
 </script>
