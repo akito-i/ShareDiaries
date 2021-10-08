@@ -7,7 +7,7 @@
         </h2>
       </v-card-title>
       <v-card-text>
-        <v-form ref="form" lazy-validation>
+        <v-form @submit.prevent="registerUser" ref="form" lazy-validation>
           <v-text-field
             v-model="user.name"
             prepend-icon="mdi-emoticon-happy"
@@ -45,7 +45,7 @@
             <v-btn
               color="light-green"
               class="white--text"
-              @click="registerUser"
+              type="submit"
             >
               登録する
             </v-btn>
@@ -80,7 +80,9 @@ export default {
   methods: {
     registerUser() {
       this.$axios.post('/api/v1/auth', this.user).then((response) => {
-        window.location.href = '/calendar'
+        this.$auth.loginWith('local',{
+          data: this.user
+        })
       })
     },
   },

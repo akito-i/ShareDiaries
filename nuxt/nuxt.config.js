@@ -78,10 +78,18 @@ export default {
 
   auth: {
     redirect: {
-      login: '/users/login',
+      login: '/calendar',
       logout: '/users/login',
       callback: false,
       home: '/calendar',
     },
+    strategies: {
+      local: {
+        endpoints: {
+          login: { url: '/api/v1/auth/sign_in', method: 'post', propertyName: 'token' },
+          user: false
+        },
+      }
+    }
   }
 }
