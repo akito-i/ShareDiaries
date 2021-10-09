@@ -15,7 +15,7 @@
           <v-list-item>
             <v-list-item-content>
               <v-subheader>
-                imamura akito
+                {{ this.$auth.user.name }}
               </v-subheader>
             </v-list-item-content>
             <v-list-item-action>
