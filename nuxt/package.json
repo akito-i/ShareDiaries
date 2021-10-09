@@ -12,7 +12,9 @@
     "test": "jest"
   },
   "dependencies": {
+    "@nuxtjs/auth": "^4.9.1",
     "@nuxtjs/axios": "^5.13.6",
+    "auth": "0.0.9",
     "core-js": "^3.15.1",
     "data-fns": "^0.1.8",
     "date-fns": "^2.24.0",
