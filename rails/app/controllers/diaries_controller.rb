@@ -9,7 +9,7 @@ class DiariesController < ApplicationController
     end
 
   def helth
-    head 200
+    head :ok
   end
 end
 
