@@ -6,7 +6,7 @@
   >
     <v-card>
       <v-card-title>
-        ユーザー一覧
+        ユーザー検索
         <v-spacer />
         <v-text-field
           append-icon="mdi-magnify"
