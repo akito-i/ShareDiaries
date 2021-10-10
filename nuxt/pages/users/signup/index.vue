@@ -78,13 +78,30 @@ export default {
     }
   },
   methods: {
-    registerUser() {
-      this.$axios.post('/api/v1/auth', this.user).then((response) => {
+    async registerUser(){
+      await this.$axios.post('/api/v1/auth', this.user)
+      .then(
         this.$auth.loginWith('local',{
-          data: this.user
+          data:{
+            email: this.user.email,
+            password: this.user.password,
+          },
         })
-      })
-    },
-  },
+      )
+      .then(
+        (response) => {
+          this.$auth.setUser(response.data.data)
+          localStorage.setItem('access-token', response.headers['access-token'])
+          localStorage.setItem('client', response.headers.client)
+          localStorage.setItem('uid', response.headers.uid)
+          localStorage.setItem('token-type', response.headers['token-type'])
+          return response
+        },
+        (error) => {
+          return error
+        }        
+      )
+    }
+  }
 }
 </script>
