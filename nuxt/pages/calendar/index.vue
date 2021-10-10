@@ -105,13 +105,13 @@
             <v-container>
               <v-row>
                 <v-col cols="6">
-                  <v-text-field  label="email" />
+                  <v-text-field v-model="user.email"  label="email" />
                 </v-col>
                 <v-col cols="6">
-                  <v-text-field label="name" />
+                  <v-text-field v-model="user.name" label="name" />
                 </v-col>
                 <v-col cols="12">
-                  <v-text-field label="hobby" />
+                  <v-text-field v-model="user.hobby" label="hobby" />
                 </v-col>
               </v-row>
             </v-container>
@@ -119,7 +119,7 @@
           <v-card-actions>
             <v-spacer />
             <v-btn @click="closeProfileDialog">閉じる</v-btn>
-            <v-btn class="primary" >更新する</v-btn>
+            <v-btn @click="editUser" class="primary" >更新する</v-btn>
             <v-spacer />
           </v-card-actions>
         </v-card>
@@ -144,6 +144,13 @@ export default {
        isShowProfile: false,
        showDate: "",
        checkbox: true,
+       user: {
+         name:this.$auth.user.name,
+         email:this.$auth.user.email,
+         hobby:this.$auth.user.hobby,
+         password:"11111111",
+         provider:"name"
+       }
     }
   },
   computed: {
@@ -169,6 +176,24 @@ export default {
     },
     closeProfileDialog () {
       this.isShowProfile = false
+    },
+    async editUser() {
+      await this.$axios
+        .put('api/v1/auth', this.user, {
+          headers: {
+            'access-token': localStorage.getItem('access-token'),
+            uid: localStorage.getItem('uid'),
+            client: localStorage.getItem('client'),
+          },
+        })
+        .then((response) => {
+          this.$auth.setUser(response.data.data)
+          localStorage.setItem('access-token', response.headers['access-token'])
+          localStorage.setItem('client', response.headers.client)
+          localStorage.setItem('uid', response.headers.uid)
+          localStorage.setItem('token-type', response.headers['token-type'])
+          this.closeProfileDialog()
+        })
     },
   }
 }
