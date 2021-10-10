@@ -14,6 +14,7 @@
           :to="item.to"
           router
           exact
+          @click="userLogout"
         >
           <v-list-item-action>
             <v-icon>{{ item.icon }}</v-icon>
@@ -98,19 +99,22 @@ export default {
       items: [
         {
           icon: 'mdi-apps',
-          title: 'Welcome',
+          title: 'logout',
           to: '/'
         },
-        {
-          icon: 'mdi-chart-bubble',
-          title: 'Inspire',
-          to: '/inspire'
-        }
       ],
       miniVariant: false,
       right: true,
       rightDrawer: false,
       title: 'Vuetify.js'
+    }
+  },
+  methods:{
+    userLogout(){
+      localStorage.setItem('access-token', "")
+      localStorage.setItem('client', "")
+      localStorage.setItem('uid', "")
+      localStorage.setItem('token-type',"")
     }
   }
 }
