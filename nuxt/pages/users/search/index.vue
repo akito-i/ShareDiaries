@@ -9,14 +9,18 @@
         ユーザー検索
         <v-spacer />
         <v-text-field
+          v-model="searchKeyword"
           append-icon="mdi-magnify"
-          label="検索"      
+          label="検索"
+          @keyup="searchUser"     
         />
       </v-card-title>
       <v-data-table
         :headers="headers"
         :items="users"
         :items-per-page="5"
+        loading=true
+        loading-text="一致するユーザーがいません。"
         class="elevation-1"
       >
         <template v-slot:[`item.action`]>
@@ -36,53 +40,31 @@ export default {
   },
   data () {
     return {
-      users: [
-        {
-          id: 1,
-          name: 'imamura',
-          email: 'imamura@sample.com',
-          hobby: '相撲,山手線一周,占い',
-        },
-        {
-          id: 2,
-          name: 'suzuki',
-          email: 'suzuki@sample.com',
-          hobby: '華道,競馬,折り紙',
-        },
-        {
-          id: 3,
-          name: 'takahashi',
-          email: 'takahashi@sample.com',
-          hobby: '落語,語学',
-        },
-        {
-          id: 4,
-          name: 'tanaka',
-          email: 'tanaka@sample.com',
-          hobby: 'プラモデル,カメラ,切手収集',
-        },
-        {
-          id: 5,
-          name: 'watanabe',
-          email: 'watanabe@sample.com',
-          hobby: '油絵,サックス',
-          follow: "フォロー"
-        },
-        {
-          id: 6,
-          name: 'ito',
-          email: 'ito@sample.com',
-          hobby: 'パズル,ロッククライミング',
-        },
-      ],
+      searchKeyword:"",
+      users: [],
       headers: [
-        { text: 'ID', value: 'id' },
-        { text: 'email', value: 'email' },
         { text: 'name', value: 'name' },
         { text: 'hobby', value: 'hobby' },
         { text: 'follow', value: 'action' }
       ],
     }
   },
+  methods: {
+    async searchUser() {
+      await this.$axios.get('/api/users/search',{
+        params: {
+          search_keyword: this.searchKeyword
+        }
+      })
+      .then(
+        (response) => {
+          this.users = Array.from(response.data.users)
+        },
+        (error) => {
+            return error
+        }
+      )
+    }
+  }
 }
 </script>
