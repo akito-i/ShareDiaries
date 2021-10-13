@@ -58,7 +58,7 @@ export default {
       })
       .then(
         (response) => {
-          this.users = Array.from(response.data.users)
+          this.users = response.data.users
         },
         (error) => {
             return error
