@@ -7,6 +7,7 @@ Rails.application.routes.draw do
         registrations: "api/v1/auth/registrations"
       }
     end
+    get "users/search", to:"users#search"
   end
   get  '/',    to: 'diaries#helth'
   resources :diaries, only: :index
